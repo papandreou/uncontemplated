@@ -84,4 +84,12 @@ describe('uncontemplated', function () {
             and to be         a number
         `;
     });
+
+    it('should support a conjunction after an assertion that takes no parameters', function () {
+        contemplate`
+            ${Math.random} to be a function
+            and when called
+                to be a number
+        `;
+    });
 });
