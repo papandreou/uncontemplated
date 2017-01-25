@@ -59,4 +59,52 @@ describe('tokenizeTemplateString', function () {
             { type: 'variable', value: 'def' }
         ]);
     });
+
+    it('should support spaceless object literals without ${...}', function () {
+        expect(tokenizeTemplateString`{foo:123} to satisfy {foo:456}`, 'to equal', [
+            { type: 'variable', value: { foo: 123 } },
+            { type: 'assertionString', value: 'to satisfy' },
+            { type: 'variable', value: { foo: 456 } }
+        ]);
+    });
+
+    it('should support spacy object literals without ${...}', function () {
+        expect(tokenizeTemplateString`{foo: 123} to satisfy {foo: 456}`, 'to equal', [
+            { type: 'variable', value: { foo: 123 } },
+            { type: 'assertionString', value: 'to satisfy' },
+            { type: 'variable', value: { foo: 456 } }
+        ]);
+    });
+
+    it('should support spaceless array literals without ${...}', function () {
+        expect(tokenizeTemplateString`[1,2,3] to satisfy [4,5,6]`, 'to equal', [
+            { type: 'variable', value: [1, 2, 3] },
+            { type: 'assertionString', value: 'to satisfy' },
+            { type: 'variable', value: [4, 5, 6] }
+        ]);
+    });
+
+    it('should support spacy array literals without ${...}', function () {
+        expect(tokenizeTemplateString`[ 1, 2, 3 ] to satisfy [ 4, 5, 6 ]`, 'to equal', [
+            { type: 'variable', value: [1, 2, 3] },
+            { type: 'assertionString', value: 'to satisfy' },
+            { type: 'variable', value: [4, 5, 6] }
+        ]);
+    });
+
+    it('should support spaceless parenthesized expressions without ${...}', function () {
+        expect(tokenizeTemplateString`(4+9) to satisfy (10+5)`, 'to equal', [
+            { type: 'variable', value: 13 },
+            { type: 'assertionString', value: 'to satisfy' },
+            { type: 'variable', value: 15 }
+        ]);
+    });
+
+    it('should support spacy parenthesized expressions without ${...}', function () {
+        expect(tokenizeTemplateString`(4 + 9) to satisfy (10 + 5)`, 'to equal', [
+            { type: 'variable', value: 13 },
+            { type: 'assertionString', value: 'to satisfy' },
+            { type: 'variable', value: 15 }
+        ]);
+    });
 });
