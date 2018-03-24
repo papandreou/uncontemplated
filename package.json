@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mocha"
   },
-  "author": "Andreas Lind <andreas@one.com>",
+  "author": "Andreas Lind <andreaslindpetersen@gmail.com>",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "mocha": "^3.2.0",
